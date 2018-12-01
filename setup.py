@@ -6,5 +6,5 @@ setup(
     name='numpycacher',
     version=numpycacher.__version__,
     test_suite='numpycacher.tests',
-    packages=find_packages(), install_requires=[]
+    packages=find_packages(), install_requires=['numpy']
 )
