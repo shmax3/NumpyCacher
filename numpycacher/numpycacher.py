@@ -2,7 +2,7 @@ import functools
 from collections import Hashable
 
 
-def quickcacher(cache, n_args):
+def quickcacher(cache, n_args, cache_size=float('+inf')):
     """Cache a function through decorating. Uses your cache *cache*. It works
     with functions like f(x, y, a, b, c) where x and y are numpy arrays and
     a, b and c are hashable parameters. In this case you must set *n_args*
@@ -21,13 +21,15 @@ def quickcacher(cache, n_args):
             if hashable in cache:
                 return cache[hashable]
             result = func(*args)
+            if len(cache) >= cache_size:
+                cache.popitem()
             cache[hashable] = result
             return result
         return wrapped
     return decorator
 
 
-def unicacher(cache):
+def unicacher(cache, cache_size=float('+inf')):
     """Cache a function through decorating. Uses your cache *cache*. It works
     with functions like f(x, y, a, b, z, c) where x, y, z are numpy arrays and
     a, b and c are hashable parameters.
@@ -42,6 +44,8 @@ def unicacher(cache):
             if hashable in cache:
                 return cache[hashable]
             result = func(*args)
+            if len(cache) >= cache_size:
+                cache.popitem()
             cache[hashable] = result
             return result
         return wrapped
