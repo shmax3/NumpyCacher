@@ -11,6 +11,7 @@ def quickcacher(cache, n_args, cache_size=float('+inf')):
     :param n_args: number of numpy arrays in your prototype of caching function.
     For example, it equals 3 if caching function is f(x, y, z, c) where the
     first three arguments are numpy arrays.
+    :param cache_size: int number that (len(cache) < cache_size).
     :return: Caching decorator.
     """
     def decorator(func):
@@ -34,6 +35,7 @@ def unicacher(cache, cache_size=float('+inf')):
     with functions like f(x, y, a, b, z, c) where x, y, z are numpy arrays and
     a, b and c are hashable parameters.
     :param cache: dict object which plays role of cache.
+    :param cache_size: int number that (len(cache) < cache_size).
     :return: Caching decorator.
     """
     def decorator(func):
